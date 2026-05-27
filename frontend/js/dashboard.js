@@ -131,7 +131,7 @@ const renderLinks = (data) => {
     emptyState.classList.add('hidden');
     linksTableBody.innerHTML = rows
       .map((link) => {
-        const shortUrl = `${redirectFront}/с/${link.code}`;
+        const shortUrl = `${redirectFront}/c/${link.code}`;
 
         return `
           <tr>
