@@ -1,3 +1,3 @@
 window.__ROUTIX_CONFIG__ = {
-  API_URL: 'http://localhost:5000'
+  API_URL: 'https://routix-api-cfl2.onrender.com'
 };
