@@ -42,6 +42,7 @@ const showModal = () => modalBackdrop?.classList.add('open');
 const closeModal = () => modalBackdrop?.classList.remove('open');
 
 const redirectBase = API_URL.replace(/\/$/, '');
+const redirectFront = 'https://rtx.jahongirdev.uz';
 
 const setStats = ({ total_clicks, unique_clicks, clicks_today }, totalLinks) => {
   statsNodes.totalClicks.textContent = total_clicks || 0;
@@ -130,7 +131,7 @@ const renderLinks = (data) => {
     emptyState.classList.add('hidden');
     linksTableBody.innerHTML = rows
       .map((link) => {
-        const shortUrl = `${redirectBase}/r/${link.code}`;
+        const shortUrl = `${redirectFront}/с/${link.code}`;
 
         return `
           <tr>

@@ -21,6 +21,12 @@
   to = "/register.html"
   status = 200
 
+[[redirects]]
+  from = "/c/*"
+  to = "https://routix-api-cfl2.onrender.com/r/:splat"
+  status = 200
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
