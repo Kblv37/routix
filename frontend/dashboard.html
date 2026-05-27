@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Routix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <a class="brand" href="/dashboard.html">
+        <span class="brand-dot"></span>
+        <span>Routix</span>
+      </a>
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" href="#">Dashboard</a>
+        <a class="sidebar-link" href="#links">Links</a>
+        <a class="sidebar-link" href="#analytics">Analytics</a>
+        <a class="sidebar-link" href="#activity">Activity</a>
+      </nav>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="mobile-topbar">
+        <a class="brand" href="/dashboard.html">
+          <span class="brand-dot"></span>
+          <span>Routix</span>
+        </a>
+        <button data-logout-btn class="btn-outline">Logout</button>
+      </div>
+
+      <header class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="topbar-user">Signed in as <strong id="user-email">...</strong></p>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button id="create-link-btn" class="btn-primary">Create Link</button>
+          <button data-logout-btn class="btn-outline">Logout</button>
+        </div>
+      </header>
+
+      <section class="stats-grid" id="analytics">
+        <article class="stat-card">
+          <h3>Total Clicks</h3>
+          <p id="stat-total-clicks">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Unique Clicks</h3>
+          <p id="stat-unique-clicks">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Today Clicks</h3>
+          <p id="stat-clicks-today">0</p>
+        </article>
+        <article class="stat-card">
+          <h3>Total Links</h3>
+          <p id="stat-total-links">0</p>
+        </article>
+      </section>
+
+      <section class="analytics-grid">
+        <article class="chart-panel">
+          <h3 class="chart-title">Clicks Over Time (14 days)</h3>
+          <canvas id="clicks-line-chart" height="120"></canvas>
+        </article>
+        <article class="chart-panel">
+          <h3 class="chart-title">Top Browsers</h3>
+          <canvas id="browsers-chart"></canvas>
+        </article>
+        <article class="chart-panel">
+          <h3 class="chart-title">Top Countries</h3>
+          <canvas id="countries-chart"></canvas>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h3 class="panel-title">Top Operating Systems</h3>
+        <ul id="top-os-list"></ul>
+      </section>
+
+      <section class="table-panel" id="links">
+        <div class="table-toolbar">
+          <h3>Tracking Links</h3>
+          <input id="search-links" placeholder="Search by code or URL" />
+        </div>
+
+        <div class="table-wrap">
+          <table class="links-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Target URL</th>
+                <th>Total</th>
+                <th>Unique</th>
+                <th>Today</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="links-table-body"></tbody>
+          </table>
+        </div>
+
+        <div id="empty-state" class="empty-state hidden">
+          <p>No links yet. Create your first tracking link.</p>
+        </div>
+
+        <div class="pagination">
+          <button id="prev-page" class="btn-outline">Prev</button>
+          <span id="pagination-label">Page 1 / 1</span>
+          <button id="next-page" class="btn-outline">Next</button>
+        </div>
+      </section>
+
+      <section class="panel activity-panel" id="activity">
+        <h3 class="panel-title">Recent Activity</h3>
+        <ul id="recent-activity" class="activity-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <div id="create-link-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3>Create Tracking Link</h3>
+        <button class="btn-outline" data-modal-close>Close</button>
+      </header>
+
+      <form id="create-link-form" class="form-grid">
+        <label class="form-field">
+          <span>Target URL</span>
+          <input type="url" name="targetUrl" required placeholder="https://example.com/page" />
+        </label>
+
+        <label class="form-field">
+          <span>Custom Code (optional)</span>
+          <input type="text" name="customCode" placeholder="spring_sale_2026" />
+        </label>
+
+        <button id="create-link-submit" type="submit" class="btn-primary">Create Link</button>
+      </form>
+
+      <div id="qr-preview"></div>
+    </div>
+  </div>
+
+  <div id="toast-root" class="toast-root"></div>
+  <script src="./js/runtime-config.js"></script>
+  <script type="module" src="./js/dashboard.js"></script>
+</body>
+</html>

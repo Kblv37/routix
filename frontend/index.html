@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Routix - Smart Redirect Tracking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="brand" href="/index.html">
+        <span class="brand-dot"></span>
+        <span>Routix</span>
+      </a>
+      <div class="nav-links">
+        <a class="btn-outline" href="/login.html">Login</a>
+        <a class="btn-primary" href="/register.html">Get Started</a>
+      </div>
+      <button class="btn-outline mobile-toggle" data-mobile-toggle>Menu</button>
+    </div>
+    <div class="mobile-menu" data-mobile-menu>
+      <a class="btn-outline" href="/login.html">Login</a>
+      <a class="btn-primary" href="/register.html">Get Started</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>Track every click. Route traffic with confidence.</h1>
+      <p>
+        Routix helps creators and teams generate branded redirect links, monitor performance,
+        and get instant analytics on browsers, devices, locations, and more.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="/register.html">Create Free Account</a>
+        <a class="btn-outline" href="/login.html">Open Dashboard</a>
+      </div>
+    </section>
+
+    <section class="features">
+      <article class="feature-card">
+        <h3>Short Link Generator</h3>
+        <p>Create clean tracking links using auto nanoid codes or your own custom slugs.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Live Analytics</h3>
+        <p>Understand total clicks, unique visits, top browsers, countries, and daily trends.</p>
+      </article>
+      <article class="feature-card">
+        <h3>Full Redirect Tracking</h3>
+        <p>Capture IP, user-agent, referer, language, device type, and timestamp per visit.</p>
+      </article>
+      <article class="feature-card">
+        <h3>QR + Sharing</h3>
+        <p>Copy links instantly and generate QR codes for social, print, and ad campaigns.</p>
+      </article>
+    </section>
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
