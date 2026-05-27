@@ -14,6 +14,8 @@
 </head>
 <body>
   <div class="dashboard-layout">
+
+    <!-- Desktop sidebar -->
     <aside class="sidebar">
       <a class="brand" href="/dashboard.html">
         <span class="brand-dot"></span>
@@ -28,25 +30,33 @@
     </aside>
 
     <main class="dashboard-main">
+
+      <!-- Mobile topbar -->
       <div class="mobile-topbar">
+        <button class="btn-ghost" id="mobile-menu-btn" aria-label="Open menu">☰</button>
         <a class="brand" href="/dashboard.html">
           <span class="brand-dot"></span>
           <span>Routix</span>
         </a>
-        <button data-logout-btn class="btn-outline">Logout</button>
+        <div class="mobile-topbar-right">
+          <button id="create-link-btn-mobile" class="btn-primary">+ New</button>
+          <button data-logout-btn class="btn-outline">Logout</button>
+        </div>
       </div>
 
+      <!-- Desktop topbar -->
       <header class="topbar">
         <div>
           <h1>Dashboard</h1>
           <p class="topbar-user">Signed in as <strong id="user-email">...</strong></p>
         </div>
-        <div style="display:flex; gap:10px; align-items:center;">
-          <button id="create-link-btn" class="btn-primary">Create Link</button>
+        <div class="topbar-actions">
+          <button id="create-link-btn" class="btn-primary">+ Create Link</button>
           <button data-logout-btn class="btn-outline">Logout</button>
         </div>
       </header>
 
+      <!-- Stats -->
       <section class="stats-grid" id="analytics">
         <article class="stat-card">
           <h3>Total Clicks</h3>
@@ -57,7 +67,7 @@
           <p id="stat-unique-clicks">0</p>
         </article>
         <article class="stat-card">
-          <h3>Today Clicks</h3>
+          <h3>Today</h3>
           <p id="stat-clicks-today">0</p>
         </article>
         <article class="stat-card">
@@ -66,9 +76,10 @@
         </article>
       </section>
 
+      <!-- Charts -->
       <section class="analytics-grid">
         <article class="chart-panel">
-          <h3 class="chart-title">Clicks Over Time (14 days)</h3>
+          <h3 class="chart-title">Clicks — 14 days</h3>
           <canvas id="clicks-line-chart" height="120"></canvas>
         </article>
         <article class="chart-panel">
@@ -81,11 +92,13 @@
         </article>
       </section>
 
-      <section class="panel">
+      <!-- OS panel -->
+      <section class="panel" style="margin-bottom: 12px;">
         <h3 class="panel-title">Top Operating Systems</h3>
         <ul id="top-os-list"></ul>
       </section>
 
+      <!-- Links table -->
       <section class="table-panel" id="links">
         <div class="table-toolbar">
           <h3>Tracking Links</h3>
@@ -120,18 +133,38 @@
         </div>
       </section>
 
+      <!-- Activity -->
       <section class="panel activity-panel" id="activity">
         <h3 class="panel-title">Recent Activity</h3>
         <ul id="recent-activity" class="activity-list"></ul>
       </section>
+
     </main>
   </div>
 
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel">
+      <a class="brand" href="/dashboard.html">
+        <span class="brand-dot"></span>
+        <span>Routix</span>
+      </a>
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" href="#" onclick="closeMobileNav()">Dashboard</a>
+        <a class="sidebar-link" href="#links" onclick="closeMobileNav()">Links</a>
+        <a class="sidebar-link" href="#analytics" onclick="closeMobileNav()">Analytics</a>
+        <a class="sidebar-link" href="#activity" onclick="closeMobileNav()">Activity</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Create link modal -->
   <div id="create-link-modal" class="modal-backdrop">
     <div class="modal-card">
       <header class="modal-header">
         <h3>Create Tracking Link</h3>
-        <button class="btn-outline" data-modal-close>Close</button>
+        <button class="btn-outline" data-modal-close>✕</button>
       </header>
 
       <form id="create-link-form" class="form-grid">
@@ -139,12 +172,10 @@
           <span>Target URL</span>
           <input type="url" name="targetUrl" required placeholder="https://example.com/page" />
         </label>
-
         <label class="form-field">
           <span>Custom Code (optional)</span>
           <input type="text" name="customCode" placeholder="spring_sale_2026" />
         </label>
-
         <button id="create-link-submit" type="submit" class="btn-primary">Create Link</button>
       </form>
 
@@ -154,6 +185,26 @@
 
   <div id="toast-root" class="toast-root"></div>
   <script src="./js/runtime-config.js"></script>
+  <script>
+    // Mobile nav
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      drawer.classList.add('open');
+    });
+    overlay.addEventListener('click', closeMobileNav);
+    function closeMobileNav() {
+      drawer.classList.remove('open');
+    }
+
+    // Wire mobile create button to same modal
+    const mobileCBtn = document.getElementById('create-link-btn-mobile');
+    if (mobileCBtn) {
+      mobileCBtn.addEventListener('click', () => {
+        document.getElementById('create-link-modal').classList.add('open');
+      });
+    }
+  </script>
   <script type="module" src="./js/dashboard.js"></script>
 </body>
 </html>
